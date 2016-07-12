@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/html5.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/respond.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/PIE_IE678.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/H-ui/static/h-ui/css/H-ui.min.css" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/H-ui/static/h-ui/css/H-ui.admin.css" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/H-ui/lib/Hui-iconfont/1.0.7/iconfont.css" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/H-ui/lib/icheck/icheck.css" />
+	<php>
+		$skin=getSkin();
+	</php>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/H-ui/static/h-ui/skin/{$skin|default='default'}/skin.css" id="skin" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/H-ui/static/h-ui/css/style.css" />
+	<!--[if IE 6]>
+	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+	<script>DD_belatedPNG.fix('*');</script>
+	<![endif]-->
+	<block name="css"></block>
+</head>
+<body>
+	<div class="page-container">
+		<block name='body'></block>
+	</div> 
+	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/jquery/1.9.1/jquery.min.js"></script> 
+	<script type="text/javascript" src="__PUBLIC__/H-ui/static/h-ui/js/H-ui.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/layer/2.1/layer.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/H-ui/static/h-ui/js/H-ui.admin.js"></script> 
+	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/Validform_v5.3.2_min.js"></script>
+	<script type="text/javascript">
+		var ajaxForm=function(slt,fuc){
+			if(fuc==undefined||fuc==null){
+				fuc=close_win;
+			}
+			$(slt).Validform({
+				'tiptype':4,
+				'ajaxPost':true,
+				callback:function(d){
+					if(d.status==1){
+						alert_success(d.info,fuc);
+					}else{
+						alert_error(d.info);
+					}
+					return false;
+				}
+			});
+		}
+		var alert_error=function (msg,fuc) {
+			layer.msg(msg, {icon: 2},fuc);
+		};
+		var alert_success=function (msg,fuc) {
+			layer.msg(msg, {icon: 1},fuc);
+		};
+		var close_win=function () {
+			var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+			parent.location.reload();
+			parent.layer.close(index); 
+		};
+	</script>
+	<block name="js"></block>
+</body>
+</html>

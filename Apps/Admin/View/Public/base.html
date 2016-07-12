@@ -1,0 +1,95 @@
+ <include file="Public:_meta" />
+ <style type="text/css">
+ 	.table a{
+ 		text-decoration:none;
+ 	}
+ 	.text-c{
+ 		margin-bottom: 15px;
+ 	}
+ 	.paging_simple_numbers{
+ 		margin-top: 10px;
+ 		height: 32px;
+ 		text-align: right;
+ 	}
+ 	.paging_simple_numbers a,.paging_simple_numbers .current{
+ 		border: 1px solid #aaa;
+ 		padding: 5px 10px;
+ 		margin-right: 5px;
+ 	}
+ 	.paging_simple_numbers .current{
+		background: #5A98DE;
+		color:#fff;
+		border: 1px solid #5A98DE;
+ 	}
+ </style>
+ <block name="css"></block>
+
+</head>
+<body>
+	<nav class="breadcrumb">
+		<i class="Hui-iconfont"></i> 桌面 
+		<block name='nav'>
+			<!-- <span class="c-gray en">&gt;</span>产品管理 -->
+
+		</block>
+		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新">
+			<i class="Hui-iconfont"></i>
+		</a>
+	</nav>
+	<div class="page-container">
+		<block name='body'></block>
+	</div> 
+	<include file="Public:_footer" />
+	<script type="text/javascript">
+		var alert_error=function (msg,fuc) {
+			layer.msg(msg, {icon: 2},fuc);
+		};
+		var alert_success=function (msg,fuc) {
+			layer.msg(msg, {icon: 1},fuc);
+		};
+		/**
+		 * 公共操作方法
+		 * @param  string tip 操作提示文本
+		 * @param  string id  操作数据编号
+		 * @param  string url 操作执行地址
+		 * @return {[type]}     [description]
+		 */
+		 var common_opt=function(tip,id,url){
+		 	layer.confirm(tip,function(index){
+		 		$.post(url, {'id': id}, function(d) {
+		 			if(d.status==1){
+		 				alert_success(d.info,function () {
+		 					location.reload();
+		 				});
+		 			}else{
+		 				alert_error(d.info);
+		 			}
+		 		});
+		 	});
+		 }
+		 var data_dels=function () {
+		 	var lis=$('.table input[type="checkbox"]:checked');
+		 	if(lis.size()>0){
+		 		layer.confirm('你确定要删除选中数据吗？',function(index){
+		 			var ids=[];
+		 			$.each(lis,function(index, el) {
+		 				ids.push($(el).val());
+		 			});
+		 			$.post("{:U('dels')}", {'ids': ids}, function(d) {
+		 				if(d.status==1){
+		 					alert_success(d.info,function () {
+		 						location.reload();
+		 					});
+		 				}else{
+		 					alert_error(d.info);
+		 				}
+		 			});
+		 		});
+		 	}else{
+		 		layer.alert('请选择你要删除的数据！');
+		 	}
+		 }
+		</script>
+		<block name="js"></block>
+	</body>
+	</html>

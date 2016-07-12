@@ -1,0 +1,73 @@
+<extend name="Public/base" />
+<block name="body">
+	<form class="form form-horizontal"   method="post" id="form-user-add" novalidate="novalidate">
+		<input type="hidden" name="id" value="{$info.id}"/>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>现在的密码：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="password"  name="old" class="input-text" value="" >
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>新密码：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="password" class="input-text" value=""  name="pass">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>再次输入新密码：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="password" class="input-text" value=""  name="agent_pass">
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</block>
+<block name='js'>
+
+	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/icheck/jquery.icheck.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/jquery.validation/1.14.0/jquery.validate.min.js"></script> 
+	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/jquery.validation/1.14.0/messages_zh.min.js"></script>
+	<script type="text/javascript">
+		$(function(){ 
+			$("#form-user-add").validate({
+				debug:true,
+				rules:{ 
+					name:{
+						required:true,
+					}, 
+				},
+				onkeyup:false,
+				focusCleanup:true,
+				success:"valid",
+				submitHandler:function(form){ 
+					if($("input[name='pass']").val()!=$("input[name='agent_pass']").val()){
+						Huimodal_alert('两次密码不一致!',2000); 
+						return ;
+					}
+
+					$.post('{:U("")}',$('form').serialize() , function(data) { 
+						if(data.status==1){ 
+							Huimodal_alert('操作成功',2000);
+							setTimeout(function (argument) {
+								window.refresh();
+							},2000);
+							// var index = parent.layer.getFrameIndex(window.name);
+							// parent.$('.btn-refresh').click();
+							// parent.layer.close(index);
+						}else{
+							Huimodal_alert(data.info,2000); 
+						}
+					}); 
+					return false;
+				}
+			});
+		});
+	</script> 
+</block>

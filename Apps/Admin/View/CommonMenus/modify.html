@@ -1,0 +1,179 @@
+<extend name="Public/_model" />
+<block name="body"> 
+	<style type="text/css">
+		.nice-select {
+			width: 245px;
+			padding: 0 10px;
+			height: 38px;
+			border: 1px solid #ddd;
+			position: relative;
+			/*box-shadow: 0 0 5px #999;*/
+			background: #fff url(__PUBLIC__/H-ui/a2.jpg) no-repeat right center;
+			cursor:pointer;
+		}
+		.nice-select input {
+			display: block;
+			width: 100%;
+			height: 38px;
+			line-height: 38px \9;
+			border: 0;
+			outline: 0;
+			background: none;
+			cursor:pointer;
+		}
+		.nice-select ul {
+			width: 100%;
+			display: none;
+			position: absolute;
+			left: -1px;
+			top: 38px;
+			overflow: hidden;
+			background-color: #fff;
+			max-height: 150px;
+			overflow-y: auto;
+			border: 1px solid #999;
+			border-top: 0;
+			box-shadow: 0 3px 5px #999;
+			z-index:9999;
+		}
+		.nice-select ul li {
+			height: 30px;
+			line-height: 30px;
+			overflow: hidden;
+			padding: 0 10px;
+			cursor: pointer;
+		}
+		.nice-select ul li.on {
+			background-color: #e0e0e0;
+		}
+	</style> 
+	<form action="" method="post" class="form form-horizontal" id="form-admin-role-add">
+		<input type="hidden" name="id" value="{$info.id}">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>菜单名称：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$info.name}" placeholder="菜单名称" id="txtName" name="name" datatype="*2-16" nullmsg="菜单名称不能为空">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>权重：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" value="{$info.weight}" class="input-text" value="99" placeholder="菜单排序权重（值大在前）" id="txtWeight" name="weight" >
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>父级菜单：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<span class="select-box" style="width:150px;">
+					<select class="select valid" id='sltPid' name="pid" size="1" aria-required="true" aria-invalid="false">
+						<option value="0">顶级菜单</option>
+						<volist name='lis' id='item'>
+							<option value="{$item.id}">&nbsp;&nbsp;{$item.name}</option>
+						</volist>
+					</select>
+					<label id="adminRole-error" class="error valid" for="adminRole"></label>
+				</span>
+
+			</div>
+		</div>
+		<div class="row cl slt_pid_1">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>菜单权限：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$info.action}" placeholder="菜单权限" id="txtAction" name="action" >
+			</div>
+		</div>
+		<div class="row cl slt_pid_1">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>菜单连接：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$info.url}" placeholder="菜单连接" id="txtUrl" name="url" >
+			</div>
+		</div>
+		<div class="row cl slt_pid_0" >
+			<label class="form-label col-xs-4 col-sm-3">菜单图标：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<div class="nice-select" name="nice-select">
+					<input type="text" id='txtIcon' value="自定义" readonly="">
+					<input type="hidden" name="icon" value="{$info.icon}">
+					<ul style="display: none;">
+						<li data-value="0" class="">自定义</li>
+						<volist name='icons' id='item'>
+							<li data-value="{$key}" class=""><i class="Hui-iconfont {$key}"></i>{$item}</li>
+						</volist>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="row cl slt_pid_0 diy_icon">
+			<label class="form-label col-xs-4 col-sm-3">图标Class：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$info.icon_class}" placeholder="图标Class" id="txtIconClass" name="icon_class" >
+			</div>
+		</div>
+		<div class="row cl slt_pid_0 diy_icon">
+			<label class="form-label col-xs-4 col-sm-3">&nbsp;</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<p><span class="label label-warning radius">注意：</span>&nbsp;&nbsp;图标使用的是
+					<a href='http://www.h-ui.net/Hui-3.7-Hui-iconfont.shtml' target="_blank">h-ui的图标库</a>，请在里面查找。</p>
+
+				</div>
+			</div>
+			<div class="row cl">
+				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+					<button type="submit" class="btn btn-success radius" id="admin-role-save" name="admin-role-save"><i class="icon-ok"></i> 确定</button>
+				</div>
+			</div>
+		</form>
+	</block>
+	<block name='js'>
+		<script type="text/javascript" src="__PUBLIC__/H-ui/lib/icheck/jquery.icheck.min.js"></script>
+		<script type="text/javascript">
+			$(function () {
+			//回绑数据
+			$('#sltPid').val("{$info.pid}");
+			ajaxForm('#form-admin-role-add');
+			$('.adminGroup input').iCheck({
+				checkboxClass: 'icheckbox-blue',
+				radioClass: 'iradio-blue',
+				increaseArea: '20%'
+			});
+			$('#sltPid').change(function(event) {
+				var v=$(this).val();
+				$('.slt_pid_0,.slt_pid_1').hide();
+				if(v==0){
+					$('.slt_pid_0').show();
+				}else{
+					$('.slt_pid_1').show();
+				}
+				
+			}).val("{$info.pid}").change();
+			var icon="{$info.icon}";
+			if(icon=='0'){
+			}else{
+				$('#txtIcon').val($('.nice-select li[data-value="'+icon+'"]').text());
+			}
+		});
+			$('[name="nice-select"]').click(function(e){
+				$('[name="nice-select"]').find('ul').hide();
+				$(this).find('ul').show();
+				e.stopPropagation();
+			});
+			$('[name="nice-select"] li').hover(function(e){
+				$(this).toggleClass('on');
+				e.stopPropagation();
+			});
+			$('[name="nice-select"] li').click(function(e){
+				var val = $(this).text();
+				var dataVal = $(this).attr("data-value");
+				$(this).parents('[name="nice-select"]').find('input[type="text"]').val(val);
+				$(this).parents('[name="nice-select"]').find('input[type="hidden"]').val(dataVal);
+				$('[name="nice-select"] ul').hide();
+				e.stopPropagation();
+				if(dataVal!='0'){
+					$('#txtIconClass').val(dataVal);
+				}
+			});
+			$(document).click(function(){
+				$('[name="nice-select"] ul').hide();
+			});
+		</script>
+	</block>

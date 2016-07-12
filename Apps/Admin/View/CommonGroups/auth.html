@@ -1,0 +1,83 @@
+<extend name="Public/_model" />
+<block name="body"> 
+	<form action="" method="post" class="form form-horizontal" id="form-admin-role-add">
+		<input type="hidden" name="id" value="{$info.id}">
+		<volist name='tree' id='m1'>
+			<dl class="permission-list">
+				<dt>
+					<label>
+						<if condition="$m1['group_id'] gt 0">
+							<input type="checkbox" checked="checked" value="{$m1.id}" name="ids[]" >
+							<else/>
+							<input type="checkbox" value="{$m1.id}" name="ids[]" >
+						</if>
+		
+						{$m1.name}
+					</label>
+				</dt>
+				<dd>
+					<volist name='m1._child' id='m2'>
+						<dl class="cl permission-list2">
+							<dt>
+								<label>
+									<if condition="$m2['group_id'] gt 0">
+										<input type="checkbox" checked="checked" value="{$m2.id}" name="ids[]" >
+										<else/>
+										<input type="checkbox" value="{$m2.id}" name="ids[]" >
+									</if>
+
+									{$m2.name}
+								</label>
+							</dt>
+							<dd>
+								<volist name='m2._child' id='m3'>
+									<label class="">
+										<if condition="$m3['group_id'] gt 0">
+											<input type="checkbox" checked="checked" value="{$m3.id}" name="ids[]" >
+											<else/>
+											<input type="checkbox" value="{$m3.id}" name="ids[]" >
+										</if>
+										{$m3.name}
+									</label>
+								</volist>
+							</dd>
+						</dl>
+					</volist>
+				</dd>
+			</dl>
+		</volist>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<button type="submit" class="btn btn-success radius" id="admin-role-save" name="admin-role-save"><i class="icon-ok"></i> 确定</button>
+			</div>
+		</div>
+	</form>
+</block>
+<block name='js'>
+	<script type="text/javascript">
+		$(function () {
+			ajaxForm('#form-admin-role-add');
+		});
+		$(function(){
+			$(".permission-list dt input:checkbox").click(function(){
+				$(this).closest("dl").find("dd input:checkbox").prop("checked",$(this).prop("checked"));
+			});
+			$(".permission-list2 dd input:checkbox").click(function(){
+				var l =$(this).parent().parent().find("input:checked").length;
+				var l2=$(this).parents(".permission-list").find(".permission-list2 dd").find("input:checked").length;
+				if($(this).prop("checked")){
+					$(this).closest("dl").find("dt input:checkbox").prop("checked",true);
+					$(this).parents(".permission-list").find("dt").first().find("input:checkbox").prop("checked",true);
+				}
+				else{
+					if(l==0){
+						$(this).closest("dl").find("dt input:checkbox").prop("checked",false);
+					}
+					if(l2==0){
+						$(this).parents(".permission-list").find("dt").first().find("input:checkbox").prop("checked",false);
+					}
+				}
+			});
+		});
+	</script>
+</block>

@@ -1,0 +1,57 @@
+<extend name="Public/base" />
+<block name="body">
+	<form class="form form-horizontal"   method="post" id="form-user-add" novalidate="novalidate">
+		<input type="hidden" name="id" value="{$info.id}"/>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>账号：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				{$info.login_name}
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>姓名：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				{$info.name}
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>电话：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				{$info.mobile}
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>邮箱：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				{$info.email}
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>注册日期：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				{$info.created|date='Y-m-d H:i:s',###}
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>最后登录日期：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				{$info.last_login_time|date='Y-m-d H:i:s',###}
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>最后登录IP：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				{$info.last_login_ip}
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>最后登录地址：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				{$info.last_login_address}
+			</div>
+		</div>
+	</form>
+</block>
+<block name='js'>
+</block>

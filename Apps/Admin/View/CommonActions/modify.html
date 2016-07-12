@@ -1,0 +1,88 @@
+<extend name="Public/_model" />
+<block name="body"> 
+	<form action="" method="post" class="form form-horizontal" id="form-admin-role-add">
+		<input type="hidden" name="id" value="{$info.id}">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>权限名称：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$info.name}" placeholder="权限名称" id="roleName" name="name" datatype="*2-16" nullmsg="权限名称不能为空">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>权限编码：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$info.code}" placeholder="权限编码" id="roleName" name="code" >
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>分组：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<span class="select-box" style="width:150px;">
+					<select id='sltPid' class="select valid" name="pid" size="1" aria-required="true" aria-invalid="false">
+						<option value="0">顶级分组</option>
+						<volist name='lis' id='item'>
+							<option value="{$item.id}">&nbsp;&nbsp;{$item.title_show}</option>
+						</volist>
+					</select>
+					<label id="adminRole-error" class="error valid" for="adminRole"></label>
+				</span>
+
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">是否分组：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<div class="adminGroup">
+					<eq name='info.is_group' value='1'>
+						<div class="radio-box">
+							<input type="radio" id="radio-1" checked="checked" value="1" name="is_group">
+							<label for="radio-1">是</label>
+						</div>
+						<div class="radio-box">
+							<input type="radio" id="radio-0" value="0" name="is_group">
+							<label for="radio-0">否</label>
+						</div>
+						<else/>
+						<div class="radio-box">
+							<input type="radio" id="radio-1" value="1" name="is_group">
+							<label for="radio-1">是</label>
+						</div>
+						<div class="radio-box">
+							<input type="radio" id="radio-0" checked="checked" value="0" name="is_group">
+							<label for="radio-0">否</label>
+						</div>
+					</eq>
+					
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">备注：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea name="remark" cols="" rows="" class="textarea"   onkeyup="textarealength(this,200)">{$info.remark}</textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+			</div>
+		</div>
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<button type="submit" class="btn btn-success radius" id="admin-role-save" name="admin-role-save"><i class="icon-ok"></i> 确定</button>
+			</div>
+		</div>
+	</form>
+</block>
+<block name='js'>
+	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/icheck/jquery.icheck.min.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			//回绑数据
+			$('#sltPid').val("{$info.pid}");
+			ajaxForm('#form-admin-role-add');
+			$('.adminGroup input').iCheck({
+				checkboxClass: 'icheckbox-blue',
+				radioClass: 'iradio-blue',
+				increaseArea: '20%'
+			});
+		});
+	</script>
+</block>

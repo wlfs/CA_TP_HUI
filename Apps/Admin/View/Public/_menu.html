@@ -1,0 +1,23 @@
+<aside class="Hui-aside">
+	<input runat="server" id="divScrollValue" type="hidden" value="" />
+	<div class="menu_dropdown bk_2">
+		<php>
+			$menus=getMenus();
+		</php>
+		<volist name='menus' id='m1'>
+			<if condition="count($m1['_child']) gt 0">
+				<dl>
+					<dt><i class="Hui-iconfont {$m1.icon_class}"></i>&nbsp;{$m1.name}<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+					<dd style="">
+						<ul>
+							<volist name='m1._child' id='m2'>
+								<li><a _href="{:U($m2['url'])}" data-title="{$m2.name}" href="javascript:void(0)">{$m2.name}</a></li>
+							</volist>
+						</ul>
+					</dd>
+				</dl>
+			</if>
+		</volist>
+	</div>
+</aside>
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>

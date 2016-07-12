@@ -1,0 +1,70 @@
+<extend name="Public/_model" />
+<block name="body"> 
+	<form action="" method="post" class="form form-horizontal" id="form-admin-role-add">
+		<input type="hidden" name="id" value="{$info.id}">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>账号：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$info.login_name}" disabled="disabled" placeholder="" >
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>姓名：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$info.name}" datatype="*2-32" nullmsg="姓名不能为空" placeholder="" id="name" name="name">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"> 手机：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$info.mobile}" placeholder="" id="phone" name="mobile">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"> 邮箱：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" value="{$info.email}" class="input-text" placeholder="@" name="email" id="email">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">用户组：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<div class="adminGroup">
+					<volist name='groups' id='group'>
+						<div class="check-box">
+							<input type="checkbox" 
+							<eq name='group.checked' value='1'>checked="checked"</eq> 
+							name="group_ids[]" value="{$group.id}" id="checkbox-{$group.id}"/>
+							<label for="checkbox-{$group.id}">{$group.name}</label>
+						</div>
+					</volist>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">备注：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea name="memo" cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" onkeyup="textarealength(this,100)">{$info.memo}</textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</block>
+<block name='js'>
+	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/icheck/jquery.icheck.min.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$('.adminGroup input').iCheck({
+				checkboxClass: 'icheckbox-blue',
+				radioClass: 'iradio-blue',
+				increaseArea: '20%'
+			});
+			ajaxForm('#form-admin-role-add');
+		});
+	</script>
+</block>

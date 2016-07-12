@@ -1,0 +1,21 @@
+<script type="text/javascript" src="__PUBLIC__/H-ui/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/H-ui/static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="__PUBLIC__/H-ui/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="__PUBLIC__/H-ui/static/h-ui/js/H-ui.admin.js"></script> 
+<script type="text/javascript">
+//新开小页面
+function system_category_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+function article_edit(title,url,id,w,h){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+function refresh(){
+	location.href=location.href;
+}
+</script> 
