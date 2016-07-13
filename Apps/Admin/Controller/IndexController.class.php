@@ -31,11 +31,19 @@ class IndexController extends AdminController {
     	}
     	$this->display();
     }
+    /**
+     * 账号
+     * @param  string $value [description]
+     * @return [type]        [description]
+     */
     public function personalInfo($value='')
     {
         $this->info=session('AdminInfo');
         $this->display();
     }
+    /**
+     * 设置皮肤(颜色)
+     */
     public function setSkin()
     {
         $d['id']=UID;

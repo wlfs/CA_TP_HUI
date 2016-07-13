@@ -23,7 +23,9 @@
 
 </head>
 <body> 
-	<div class="header"></div>
+	<div class="header">
+		&nbsp;ivier
+	</div>
 	<div class="loginWraper">
 		<div id="loginform" class="loginBox">
 			<form class="form form-horizontal" id="login_form" action="" >
@@ -40,7 +42,10 @@
 					</div>
 				</div>
 				<div class="row cl">
-					<div class="formControls col-xs-8 col-xs-offset-3">
+					<label class="form-label col-xs-3">
+						<img src="__PUBLIC__/H-ui/static/h-ui/images/verify.png" class="Hui-iconfont" width="24" />
+					</label>
+					<div class="formControls col-xs-8 ">
 						<input class="input-text size-L" type="text" placeholder="验证码" style="width:150px;" name="verify" id="texverify">
 						<img src="{:U('verify')}" onclick="this.src='{:U('verify')}?t='+Math.random()" id="imgverify"> </div>
 					</div>

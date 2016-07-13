@@ -13,7 +13,14 @@
 body{font-size:14px}
 
 .header,.footer{ position:absolute; left:0; right:0; width:100%; z-index:99}
-.header{top:0; height:60px; background:#426374 url(../images/logo.png) no-repeat 0 center}
+.header{
+	line-height: 60px;
+	color: #fff;
+	top:0;
+	font-size: 26px;
+	height:60px; 
+	background:#426374; /*background:#426374 url(../images/logo.png) no-repeat 0 center*/
+}
 
 .loginWraper{ position:absolute;width:100%; left:0; top:0; bottom:0; right:0; z-index:1; background:#3283AC url(../images/admin-login-bg.jpg) no-repeat center}
 .loginBox{ position:absolute; width:617px; height:330px; background:url(../images/admin-loginform-bg.png) no-repeat; left:50%; top:50%; margin-left:-309px; margin-top:-184px; padding-top:38px}
@@ -26,7 +33,7 @@ body{font-size:14px}
 @media (max-width:617px) {
 	.loginBox .input-text{ width:80%}
 }
-	.yzm a{ color:#426374; font-size:12px}
+.yzm a{ color:#426374; font-size:12px}
 
 #span_msg{ font-size:14px; color:Red; line-height:40px; height:40px; margin-left:10px; width:160px;; float:left}
 
