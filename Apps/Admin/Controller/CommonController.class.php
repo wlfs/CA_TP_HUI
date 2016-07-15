@@ -16,12 +16,12 @@ class CommonController extends Controller {
 				if($r->status==1){
 					session('AdminInfo',$r->data);
 					$this->_getActions($r->data['id']);
+					$return_url=session('login_return_url');
+					if(empty($return_url)){
+						$return_url=U('index/index');
+					}
+					$r->data=$return_url;
 				}
-				$return_url=session('login_return_url');
-				if(empty($return_url)){
-					$return_url=U('index/index');
-				}
-				$r->data=$return_url;
 				$this->ajaxReturn($r);
 			}else{
 				$this->ajaxReturn(RE('验证码错误！'));

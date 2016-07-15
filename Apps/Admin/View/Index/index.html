@@ -1,13 +1,13 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="renderer" content="webkit|ie-comp|ie-stand">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<LINK rel="Bookmark" href="/favicon.ico" >
-<LINK rel="Shortcut Icon" href="/favicon.ico" />
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<LINK rel="Bookmark" href="/favicon.ico" >
+		<LINK rel="Shortcut Icon" href="/favicon.ico" />
 <!--[if lt IE 9]>
 <script type="text/javascript" src="__PUBLIC__/H-ui/lib/html5.js"></script>
 <script type="text/javascript" src="__PUBLIC__/H-ui/lib/respond.min.js"></script>
@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/H-ui/static/h-ui/css/H-ui.admin.css" />
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/H-ui/lib/Hui-iconfont/1.0.7/iconfont.css" />
 <php>
-$skin=getSkin();
+	$skin=getSkin();
 </php>
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/H-ui/static/h-ui/skin/{$skin|default='default'}/skin.css" id="skin" />
 <!--[if IE 6]>
@@ -26,74 +26,42 @@ $skin=getSkin();
 <![endif]-->
 </head>
 <body>
-<include file="Public:_nav" />
-<include file="Public:_menu" />
-<section class="Hui-article-box">
-	<div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
-		<div class="Hui-tabNav-wp">
-			<ul id="min_title_list" class="acrossTab cl">
-				<li class="active"><span title="我的桌面" data-href="{:U('welcome')}">我的桌面</span><em></em></li>
-			</ul>
+	<include file="Public:_nav" />
+	<include file="Public:_menu" />
+	<section class="Hui-article-box">
+		<div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
+			<div class="Hui-tabNav-wp">
+				<ul id="min_title_list" class="acrossTab cl">
+					<li class="active"><span title="我的桌面" data-href="{:U('welcome')}">我的桌面</span><em></em></li>
+				</ul>
+			</div>
+			<div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a></div>
 		</div>
-		<div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a></div>
-	</div>
-	<div id="iframe_box" class="Hui-article">
-		<div class="show_iframe">
-			<div style="display:none" class="loading"></div>
-			<iframe scrolling="yes" name='content_ifram' frameborder="0" src="{:U('welcome')}"></iframe>
+		<div id="iframe_box" class="Hui-article">
+			<div class="show_iframe">
+				<div style="display:none" class="loading"></div>
+				<iframe scrolling="yes" name='content_ifram' frameborder="0" src="{:U('welcome')}"></iframe>
+			</div>
 		</div>
-	</div>
-</section>
-<script type="text/javascript" src="__PUBLIC__/H-ui/lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="__PUBLIC__/H-ui/static/h-ui/js/H-ui.js"></script>
-<script type="text/javascript" src="__PUBLIC__/H-ui/static/h-ui/js/H-ui.admin.js"></script>
-<script type="text/javascript" src="__PUBLIC__/H-ui/lib/layer/2.1/layer.js"></script> 
-	  <script type="text/javascript">
-/*资讯-添加*/
-function article_add(title,url){
-	var index = layer.open({
-		type: 2,
-		title: title,
-		content: url
-	});
-	layer.full(index);
-}
-/*图片-添加*/
-function picture_add(title,url){
-	var index = layer.open({
-		type: 2,
-		title: title,
-		content: url
-	});
-	layer.full(index);
-}
-/*产品-添加*/
-function product_add(title,url){
-	var index = layer.open({
-		type: 2,
-		title: title,
-		content: url
-	});
-	layer.full(index);
-}
-/*用户-添加*/
-function member_add(title,url,w,h){
-	layer_show(title,url,w,h);
-}
-/*换肤*/
-	$("#Hui-skin .dropDown-menu a").click(function(){
-		var v = $(this).attr("data-val");
-		setCookie("Huiskin", v);
-		var hrefStr=$("#skin").attr("href");
-		var hrefRes=hrefStr.substring(0,hrefStr.lastIndexOf('skin/'))+'skin/'+v+'/skin.css';
-		$(window.frames.document).contents().find("#skin").attr("href",hrefRes);
-		$.post("{:U('Index/setSkin')}", {'skin': v}, function(d) {});
-	});
-	$(function (argument) {
-		$('.menu_dropdown>dl>dt:first').click();
-	})
-	
-</script> 
-	<block name="js"> </block>
+	</section>
+	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/jquery/1.9.1/jquery.min.js"></script> 
+	<script type="text/javascript" src="__PUBLIC__/H-ui/static/h-ui/js/H-ui.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/H-ui/static/h-ui/js/H-ui.admin.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/layer/2.1/layer.js"></script> 
+	<script type="text/javascript">
+		/*换肤*/
+		$("#Hui-skin .dropDown-menu a").click(function(){
+			var v = $(this).attr("data-val");
+			setCookie("Huiskin", v);
+			var hrefStr=$("#skin").attr("href");
+			var hrefRes=hrefStr.substring(0,hrefStr.lastIndexOf('skin/'))+'skin/'+v+'/skin.css';
+			$(window.frames.document).contents().find("#skin").attr("href",hrefRes);
+			$.post("{:U('Index/setSkin')}", {'skin': v}, function(d) {});
+		});
+		$(function (argument) {
+			$('.menu_dropdown>dl>dt:first').click();
+		})
+		
+	</script> 
 </body>
 </html>
