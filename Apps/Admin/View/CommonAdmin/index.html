@@ -71,10 +71,12 @@
 			</volist>
 		</tbody>
 	</table>
-
-	<div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-		<php>echo $pageInfo->show();</php>
+	<div class='paging_simple_numbers'>
+		<php>
+			echo $pageInfo->show();
+		</php>
 	</div>
+	
 	<script type="text/javascript">
 		/*管理员-角色-删除*/
 		function admin_role_del(obj,id){
